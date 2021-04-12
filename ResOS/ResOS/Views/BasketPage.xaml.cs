@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResOS.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,21 @@ namespace ResOS.Views
         public BasketPage()
         {
             InitializeComponent();
+            ViewModel = new BasketPageViewModel();
+        }
+
+        //this is why you document and comment your code so you don't waste
+        //previous time
+        protected override void OnAppearing()
+        {
+            ViewModel.LoadOrdersCommand.Execute(null);
+            base.OnAppearing();
+        }
+
+        BasketPageViewModel ViewModel
+        {
+            get { return BindingContext as BasketPageViewModel; }
+            set { BindingContext = value; }
         }
     }
 }

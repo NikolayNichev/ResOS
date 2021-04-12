@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ResOS.Views.AddItemPage">
+             x:Class="ResOS.Views.AddItemPage"
+             x:Name="AddItemView">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Add Menu Item?"                
@@ -13,12 +14,15 @@
             <Label Text="Price" FontSize="Large"/>
             <Label Text="{Binding Price}" FontSize="Medium"/>
             <Label Text="Quantity" HorizontalOptions="Center" FontSize="Large"/>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
-                <Button Text="-" FontSize="Medium" HorizontalOptions="Center"/>
+            <Label HorizontalOptions="Center" Text="{Binding Quantity}" FontSize="Medium"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >                
+                <Stepper Value="{Binding Quantity}" Minimum="0" Maximum="10" x:Name="stepper" Increment="1" />
+                <!--<Button Text="-" FontSize="Medium" Command="{Binding MinusButtonPressedCommand}" HorizontalOptions="Center"/>
                 <Label Text="{Binding Quantity}" BackgroundColor="Aqua" HorizontalOptions="Center" FontSize="Large"/>
-                <Button Text="+" FontSize="Medium" HorizontalOptions="Center"/>
+                <Button Text="+" FontSize="Medium" Command="{Binding PlusButtonPressedCommand}" HorizontalOptions="Center"/>-->
             </StackLayout>
-            <Button Text="ADD ITEM" HorizontalOptions="Center"/>
+            <Button Text="ADD ITEM" 
+                    Command="{Binding AddMenuItemCommand}" HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

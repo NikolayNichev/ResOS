@@ -16,6 +16,7 @@ namespace ResOS.Models
             databaseModel = new DatabaseModel();
             connection = databaseModel.GetConnection();
             connection.CreateTableAsync<MenuItems>();
+            //connection.CreateTableAsync<MenuOrder>();
         }
 
         public async Task<List<MenuItems>> GetMenuItemsAsync() 
@@ -26,6 +27,7 @@ namespace ResOS.Models
         public async Task AddMenuItem(MenuItems menuItem) 
         {
             await connection.InsertAsync(menuItem);
+
         }
         public async Task UpdateMenuItem(MenuItems menuItem) 
         {
@@ -46,5 +48,29 @@ namespace ResOS.Models
         {
             return await connection.QueryAsync<MenuItems>("SELECT * FROM MenuItems WHERE IsAdded = 1");
         }
+
+
+        ///commands for the Menu Order database
+        /*
+        public async Task AddMenuOrder(MenuOrder menuOrder)
+        {
+            await connection.InsertAsync(menuOrder);
+        }
+        //public async Task AddMenuItemToOrder(MenuItems item) 
+        //{
+        //    //await connection.Table<MenuOrder>.AddMenuItem(item);
+        //    MenuOrder  = GetOrders();
+        //}
+
+        public async Task<List<MenuOrder>> GetOrders()
+        {
+            return await connection.Table<MenuOrder>().ToListAsync();
+        }
+
+        public async Task DeleteAllOrders() 
+        {
+            await connection.DeleteAllAsync<MenuOrder>();
+        }
+        */
     }
 }

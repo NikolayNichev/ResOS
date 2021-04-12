@@ -33,13 +33,14 @@ namespace ResOS.ViewModels
 
         public NewItemViewModel()
         {
-            databaseModel = new DatabaseModel();
-            connection = databaseModel.GetConnection();
-            connection.CreateTableAsync<MenuItems>();
+            databaseModel = new DatabaseModel(); //the database model is created
+            connection = databaseModel.GetConnection(); //the connection is retrieved
+            connection.CreateTableAsync<MenuItems>(); //a table of MenuItems is created in case one doesn't  
+                                                      // already exist 
 
-            menuDatabase = new MenuDatabase();
+            menuDatabase = new MenuDatabase(); //the database of menu items is initialized
 
-            menu = new MenuItems();
+            menu = new MenuItems(); //the menu object is initialised 
             
             //
             SaveCommand = new Command(async () => await OnSave());
@@ -83,15 +84,16 @@ namespace ResOS.ViewModels
         public async Task OnSave()
         {
             //New
-            if (AllFieldsFull()) 
+            if (AllFieldsFull())  //the all method is used to check if the user has entered all fields
             {
-                await menuDatabase.AddMenuItem(menu);
-                MessagingCenter.Send(this, "MenuItemAdded", menu);
-                await Application.Current.MainPage.Navigation.PopAsync();
+                await menuDatabase.AddMenuItem(menu); //the menu item is added to the database
+                MessagingCenter.Send(this, "MenuItemAdded", menu); //the messaging sender contacts the ItemsPage to add items to the menu through the 
+                                                                   //MenuItemAdded method
+                await Application.Current.MainPage.Navigation.PopAsync(); //the page closes
             }
             else 
             {
-                await Application.Current.MainPage.DisplayAlert("ERROR", "Please fill all fields to continue", "OK");
+                await Application.Current.MainPage.DisplayAlert("ERROR", "Please fill all fields to continue", "OK"); //if the user enters the incorrect input an error is displayed
             }
 
 
@@ -109,6 +111,7 @@ namespace ResOS.ViewModels
             //await Shell.Current.GoToAsync("..");
         }
 
+        //the boolean checks if the user has entered all fields in the program
         public bool AllFieldsFull() 
         {
             if (string.IsNullOrWhiteSpace(menu.Text) || string.IsNullOrWhiteSpace(menu.Description) || double.IsNaN(menu.Quantity))              

@@ -7,6 +7,18 @@
             <Label Text="Shopping Basket Items:"
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <ListView ItemsSource="{Binding MenuOrder}" HasUnevenRows="True"
+              SeparatorColor="Black">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell Text="{Binding Text}"                               
+                           Detail="{Binding PriceInGBP}"                        
+                           DetailColor="Black"
+                           TextColor="Red">
+                        </ImageCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Button Text="Checkout"/>
         </StackLayout>
     </ContentPage.Content>
