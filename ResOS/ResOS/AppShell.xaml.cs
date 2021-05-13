@@ -26,6 +26,9 @@ namespace ResOS
             await Launcher.OpenAsync(new Uri("https://play.google.com/store"));
         }
 
+
+
+
         private void CloseApplicationItemClicked(object sender, EventArgs e) 
         {
             System.Diagnostics.Process.GetCurrentProcess().Kill();

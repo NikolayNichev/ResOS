@@ -43,7 +43,7 @@
                     </Label.FormattedText>
                 </Label>
                 <Button Margin="0,10,0,0" Text="Go"
-                        Command="{Binding OpenWebCommand}"
+                        Command="{Binding OpenMenuCommand}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
             </StackLayout>

@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using SQLite;
 using System.Windows.Input;
+using System.Net.Sockets;
+using Newtonsoft.Json;
 
 namespace ResOS.ViewModels
 {
@@ -20,9 +22,14 @@ namespace ResOS.ViewModels
         private readonly DatabaseModel databaseModel;
         private readonly SQLiteAsyncConnection connection;
 
+
+        private MenuItems menuOrderItem;
+
         public event PropertyChangedEventHandler PropertyChanged;
+        
 
         public ICommand LoadOrdersCommand;
+
 
         void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -46,7 +53,12 @@ namespace ResOS.ViewModels
 
         private void OnMenuItemAdded(ItemDetailViewModel arg1, MenuItems menuItem)
         {
-            MenuOrder.Add(menuItem);
+            
+
+            menuOrderItem = menuItem;
+            menuOrderItem.Price = menuItem.Price * menuItem.Quantity;
+            MenuOrder.Add(menuOrderItem);
+            OnPropertyChanged();            
         }
 
         async Task LoadOrders() 

@@ -11,5 +11,10 @@ namespace ResOS.Views
         {
             InitializeComponent();
         }
+
+        public async void OpenMenu()         
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new ItemsPage());
+        }
     }
 }
